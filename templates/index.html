@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Language Translation Tool</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <main class="page">
+    <header class="masthead">
+      <p class="eyebrow">CodeAlpha AI Internship &middot; Task 1</p>
+      <h1>Language Translation Tool</h1>
+      <p class="lede">Type or paste text, pick the languages, and get the translation instantly.</p>
+    </header>
+
+    <section class="translator" aria-label="Translator">
+      <!-- Language pickers -->
+      <div class="lang-bar">
+        <label class="lang-field">
+          <span>From</span>
+          <select id="source-lang" aria-label="Source language"></select>
+        </label>
+
+        <button id="swap-btn" class="icon-btn swap" type="button" title="Swap languages" aria-label="Swap languages">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 7h11l-3-3M17 17H6l3 3" /></svg>
+        </button>
+
+        <label class="lang-field">
+          <span>To</span>
+          <select id="target-lang" aria-label="Target language"></select>
+        </label>
+      </div>
+
+      <!-- Input and output panels -->
+      <div class="panels">
+        <div class="panel">
+          <textarea id="source-text" maxlength="{{ max_chars }}" placeholder="Enter text to translate…" autofocus></textarea>
+          <div class="panel-foot">
+            <span id="char-count" class="muted">0 / {{ max_chars }}</span>
+            <div class="actions">
+              <button id="speak-source" class="icon-btn" type="button" title="Listen" aria-label="Listen to the original text">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" /></svg>
+              </button>
+              <button id="clear-btn" class="icon-btn" type="button" title="Clear" aria-label="Clear text">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18" /></svg>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="panel output">
+          <div id="output-text" class="output-text" aria-live="polite">
+            <span class="placeholder">Translation will appear here</span>
+          </div>
+          <div class="panel-foot">
+            <span id="status" class="muted" role="status"></span>
+            <div class="actions">
+              <button id="speak-output" class="icon-btn" type="button" title="Listen" aria-label="Listen to the translation">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4zM16.5 8.5a5 5 0 0 1 0 7M19 6a8.5 8.5 0 0 1 0 12" /></svg>
+              </button>
+              <button id="copy-btn" class="text-btn" type="button">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2" /><path d="M5 15V6a2 2 0 0 1 2-2h9" /></svg>
+                <span>Copy</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <p id="error" class="error" role="alert" hidden></p>
+        <span class="muted hint">Ctrl + Enter</span>
+        <button id="translate-btn" class="primary-btn" type="button">Translate</button>
+      </div>
+    </section>
+
+    <footer class="footnote">
+      Built with Flask and the Google Translate API.
+    </footer>
+  </main>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
